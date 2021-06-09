@@ -94,7 +94,7 @@ AsciiTable.alignLeft = function(str, len, pad) {
 
   var strLen = str.length
   if (str.includes("href")) {
-    strLen = str.match(/<a href.*?>(.*)<\/a>/i)[1].length
+    strLen = str.replaceAll(/<a href=.*?>/ig, '').replaceAll(/<\/a>/ig, '').length
   }
 
   var alen = len + 1 - strLen
@@ -236,8 +236,8 @@ AsciiTable.prototype.clear = function(name) {
 /**
  * Set the table border
  *
- * @param {String} horizontal edges (optional, default `|`)
- * @param {String} vertical edges (optional, default `-`)
+ * @param {String} edge horizontal edges (optional, default `|`)
+ * @param {String} fill vertical edges (optional, default `-`)
  * @param {String} top corners (optional, default `.`)
  * @param {String} bottom corners (optional, default `'`)
  * @api public
@@ -531,10 +531,8 @@ AsciiTable.prototype.toString = function() {
     for (var k = 0; k < mLen; k++) {
       var cell = row[k]
       try {
-        if (cell.includes("href")) {  // #eyo fix for href cell len
-          cell = row[k].toString().match(/.*?>(.*)<\/a>/i)[1]
-
-        } // else {cell = row[k]}
+        // don't include links in length
+        cell = cell.toString().replaceAll(/<a href=.*?>/ig, '').replaceAll(/<\/a>/ig, '')
       } catch(err) { cell = row[k] }
       max[k] = Math.max(max[k], cell ? cell.toString().length : 0)
     }
@@ -609,11 +607,11 @@ AsciiTable.prototype._renderTitle = function(len) {
 }
 
 /**
- * Render an invdividual row
+ * Render an individual row
  *
  * @param {Array} row
- * @param {String} column seperator
- * @param {Number} total row alignment (optional, default `auto`)
+ * @param {String} str column seperator
+ * @param {Number} align total row alignment (optional, default `auto`)
  * @return {String} formatted row
  * @api private
  */

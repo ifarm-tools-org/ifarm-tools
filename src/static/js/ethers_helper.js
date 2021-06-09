@@ -1431,6 +1431,8 @@ function getUniPrices(tokens, prices, pool, chain="eth")
   else if (pool.symbol.includes("DFYN")) stakeTokenTicker += " DFYN LP";
   else if (pool.symbol.includes("SPIRIT")) stakeTokenTicker += " SPIRIT LP";
   else if (pool.symbol.includes("spLP")) stakeTokenTicker += " SPOOKY LP";
+  else if (pool.symbol.includes("BRUSH-LP")) stakeTokenTicker += " BRUSH LP";
+  else if (pool.symbol.includes("Beco-LP")) stakeTokenTicker += " Beco LP";
   else if (pool.symbol.includes("Lv1")) stakeTokenTicker += " STEAK LP";
   else if (pool.symbol.includes("PLP")) stakeTokenTicker += " Pure Swap LP";
   else if (pool.symbol.includes("Field-LP")) stakeTokenTicker += " Yield Fields LP";
@@ -1463,7 +1465,7 @@ function getUniPrices(tokens, prices, pool, chain="eth")
           _print(`<a href='${poolUrl}' target='_blank'>${stakeTokenTicker}</a>${helperHrefs} Price: $${formatMoney(price)} TVL: $${formatMoney(tvl)}`);
           _print(`${t0.symbol} Price: $${displayPrice(p0)}`);
           _print(`${t1.symbol} Price: $${displayPrice(p1)}`);
-          _print(`Staked: ${pool.staked.toFixed(decimals ?? 4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
+          _print(`Staked: ${formatMoney(pool.staked, (decimals ?? 4))} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
 
         }
         else {
@@ -1483,6 +1485,8 @@ function getUniPrices(tokens, prices, pool, chain="eth")
               pool.name.includes("Value LP") ?  `https://info.vswap.fi/pool/${pool.address}` :
               pool.symbol.includes("SPIRIT") ?  `https://swap.spiritswap.finance/#/swap` :
               pool.symbol.includes("spLP") ?  `https://info.spookyswap.finance/pair/${pool.address}` :
+              pool.symbol.includes("BRUSH-LP") ? `https://info.paintswap.finance/pair/${pool.address}`:
+              pool.symbol.includes("Beco-LP") ?  `https://becoswap.info/pair/${pool.address}` :
               pool.symbol.includes("Lv1") ?  `https://info.steakhouse.finance/pair/${pool.address}` :
               pool.symbol.includes("ELP") ?  `https://app.elk.finance/#/swap` :
               pool.symbol.includes("PLP") ?  `https://exchange.pureswap.finance/#/swap` :
@@ -1524,7 +1528,7 @@ function getUniPrices(tokens, prices, pool, chain="eth")
           ] :
           pool.symbol.includes("ELP") ? [
             `https://app.elk.finance/#/add/${t0address}/${t1address}`,
-            `hhttps://app.elk.finance/#/remove/${t0address}/${t1address}`,
+            `https://app.elk.finance/#/remove/${t0address}/${t1address}`,
             `https://app.elk.finance/#/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
           ] :
           pool.symbol.includes("CS-LP") ? [
@@ -1538,14 +1542,24 @@ function getUniPrices(tokens, prices, pool, chain="eth")
             `https://app.sushi.com/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
           ] :
           pool.symbol.includes("SPIRIT") ? [
-            `https://swap.spiritswap.finance/add/${t0address}/${t1address}`,
-            `https://swap.spiritswap.finance/remove/${t0address}/${t1address}`,
-            `https://swap.spiritswap.finance/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
+            `https://swap.spiritswap.finance/#/add/${t0address}/${t1address}`,
+            `https://swap.spiritswap.finance/#/remove/${t0address}/${t1address}`,
+            `https://swap.spiritswap.finance/#/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
           ] :
           pool.symbol.includes("spLP") ? [
             `https://spookyswap.finance/add/${t0address}/${t1address}`,
             `https://spookyswap.finance/remove/${t0address}/${t1address}`,
             `https://spookyswap.finance/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
+          ] :
+          pool.symbol.includes("BRUSH-LP") ? [
+            `https://exchange.paintswap.finance/#/add/${t0address}/${t1address}`,
+            `https://exchange.paintswap.finance/#/remove/${t0address}/${t1address}`,
+            `https://exchange.paintswap.finance/#/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
+          ] :
+            pool.symbol.includes("Beco-LP") ? [
+            `https://exchange.becoswap.com/#/add/${t0address}/${t1address}`,
+            `https://exchange.becoswap.com/#/remove/${t0address}/${t1address}`,
+            `https://exchange.becoswap.com/#/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
           ] :
           pool.symbol.includes("PLP") ? [
             `https://exchange.pureswap.finance/#/add/${t0address}/${t1address}`,
@@ -1581,7 +1595,7 @@ function getUniPrices(tokens, prices, pool, chain="eth")
           _print(`<a href='${poolUrl}' target='_blank'>${stakeTokenTicker}</a>${helperHrefs} Price: $${formatMoney(price)} TVL: $${formatMoney(tvl)}`);
           _print(`${t0.symbol} Price: $${displayPrice(p0)}`);
           _print(`${t1.symbol} Price: $${displayPrice(p1)}`);
-          _print(`Staked: ${pool.staked.toFixed(decimals ?? 4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
+          _print(`Staked: ${formatMoney(pool.staked, (decimals ?? 4))} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
         }
       },
       pair_links(chain="eth", decimals, customURLs) {
@@ -1736,7 +1750,7 @@ function getValuePrices(tokens, prices, pool)
         _print(`<a href='${poolUrl}' target='_blank'>${stakeTokenTicker}</a>${helperHrefs} Price: $${formatMoney(price)} TVL: $${formatMoney(tvl)}`);
         _print(`${t0.symbol} Price: $${formatMoney(p0)}`)
         _print(`${t1.symbol} Price: $${formatMoney(p1)}`)
-        _print(`Staked: ${pool.staked.toFixed(4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
+        _print(`Staked: ${formatMoney(pool.staked, 4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
       },
       pair_links() {
         const poolUrl = `https://info.vswap.fi/pool/${pool.address}`
@@ -1809,7 +1823,7 @@ function getBalancerPrices(tokens, prices, pool)
         poolPrices.forEach((p, i) =>
           _print(`${poolTokens[i].symbol} Price: $${formatMoney(p)}`)
         );
-        _print(`Staked: ${pool.staked.toFixed(4)} ${stakeTokenTicker} ($${formatMoney(staked_tvl)})`);
+        _print(`Staked: ${formatMoney(pool.staked, 4)} ${stakeTokenTicker} ($${formatMoney(staked_tvl)})`);
       },
       print_contained_price(userStaked) {
         var userPct = userStaked / pool.totalSupply;
@@ -1842,7 +1856,7 @@ function getWrapPrices(tokens, prices, pool)
       stakeTokenTicker : pool.symbol,
       print_price() {
         _print(`${name} Price: $${formatMoney(price)} TVL: $${formatMoney(tvl)}`);
-        _print(`Staked: ${pool.staked.toFixed(4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
+        _print(`Staked: ${formatMoney(pool.staked, 4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
       },
       print_contained_price(_) {
       }
@@ -1869,7 +1883,7 @@ function getWrapPrices(tokens, prices, pool)
       stakeTokenTicker : pool.symbol,
       print_price() {
         _print(`${pool.symbol} Price: $${formatMoney(price)} TVL: $${formatMoney(tvl)}`);
-        _print(`Staked: ${pool.staked.toFixed(4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
+        _print(`Staked: ${formatMoney(pool.staked, 4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
       },
       print_contained_price(_) {
       }
@@ -1915,7 +1929,7 @@ function getErc20Prices(prices, pool, chain="eth") {
     stakeTokenTicker : pool.symbol,
     print_price() {
       _print(`${name} Price: $${displayPrice(price)} Market Cap: $${formatMoney(tvl)}`);
-      _print(`Staked: ${pool.staked.toFixed(4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
+      _print(`Staked: ${formatMoney(pool.staked, 4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
     },
     pair_links() {
       return {
@@ -1950,7 +1964,7 @@ function getCurvePrices(prices, pool) {
     stakeTokenTicker : pool.symbol,
     print_price() {
       _print(`${name} Price: $${formatMoney(price)} Market Cap: $${formatMoney(tvl)}`);
-      _print(`Staked: ${pool.staked.toFixed(4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
+      _print(`Staked: ${formatMoney(pool.staked, 4)} ${pool.symbol} ($${formatMoney(staked_tvl)})`);
     },
     print_contained_price() {
     }
@@ -2008,22 +2022,22 @@ function printAPR(rewardTokenTicker, rewardPrice, poolRewardsPerWeek,
                   fixedDecimals) {
   var usdPerWeek = poolRewardsPerWeek * rewardPrice;
   fixedDecimals = fixedDecimals ?? 2;
-  _print(`${rewardTokenTicker} Per Week: ${poolRewardsPerWeek.toFixed(fixedDecimals)} ($${formatMoney(usdPerWeek)})`);
+  _print(`${rewardTokenTicker} Per Week: ${formatMoney(poolRewardsPerWeek, fixedDecimals)} ($${formatMoney(usdPerWeek)})`);
   var weeklyAPR = usdPerWeek / staked_tvl * 100;
   var dailyAPR = weeklyAPR / 7;
   var yearlyAPR = weeklyAPR * 52;
-  _print(`APR: Day ${dailyAPR.toFixed(2)}% Week ${weeklyAPR.toFixed(2)}% Year ${yearlyAPR.toFixed(2)}%`);
+  _print(`APR: Day ${formatMoney(dailyAPR, 2)}% Week ${formatMoney(weeklyAPR, 2)}% Year ${formatMoney(yearlyAPR, 2)}%`);
   var userStakedUsd = userStaked * poolTokenPrice;
   var userStakedPct = userStakedUsd / staked_tvl * 100;
-  _print(`You are staking ${userStaked.toFixed(fixedDecimals)} ${stakeTokenTicker} ($${formatMoney(userStakedUsd)}), ${userStakedPct.toFixed(2)}% of the pool.`);
+  _print(`You are staking ${formatMoney(userStaked, fixedDecimals)} ${stakeTokenTicker} ($${formatMoney(userStakedUsd)}), ${formatMoney(userStakedPct, 2)}% of the pool.`);
   var userWeeklyRewards = userStakedPct * poolRewardsPerWeek / 100;
   var userDailyRewards = userWeeklyRewards / 7;
   var userYearlyRewards = userWeeklyRewards * 52;
   if (userStaked > 0) {
     _print(`Estimated ${rewardTokenTicker} earnings:`
-        + ` Day ${userDailyRewards.toFixed(fixedDecimals)} ($${formatMoney(userDailyRewards*rewardPrice)})`
-        + ` Week ${userWeeklyRewards.toFixed(fixedDecimals)} ($${formatMoney(userWeeklyRewards*rewardPrice)})`
-        + ` Year ${userYearlyRewards.toFixed(fixedDecimals)} ($${formatMoney(userYearlyRewards*rewardPrice)})`);
+        + ` Day ${formatMoney(userDailyRewards, fixedDecimals)} ($${formatMoney(userDailyRewards*rewardPrice)})`
+        + ` Week ${formatMoney(userWeeklyRewards, fixedDecimals)} ($${formatMoney(userWeeklyRewards*rewardPrice)})`
+        + ` Year ${formatMoney(userYearlyRewards, fixedDecimals)} ($${formatMoney(userYearlyRewards*rewardPrice)})`);
   }
   return {
     userStakedUsd,
@@ -2048,16 +2062,16 @@ function printChefContractLinks(App, chefAbi, chefAddr, poolIndex, poolAddress, 
     return chefContract_claim(chefAbi, chefAddr, poolIndex, App, pendingRewardsFunction, claimFunction)
   }
   if(depositFee > 0){
-    _print_link(`Stake ${unstaked.toFixed(fixedDecimals)} ${stakeTokenTicker} - Fee ${depositFee}%`, approveAndStake)
+    _print_link(`Stake ${formatMoney(unstaked, fixedDecimals)} ${stakeTokenTicker} - Fee ${depositFee}%`, approveAndStake)
   }else{
-    _print_link(`Stake ${unstaked.toFixed(fixedDecimals)} ${stakeTokenTicker}`, approveAndStake)
+    _print_link(`Stake ${formatMoney(unstaked, fixedDecimals)} ${stakeTokenTicker}`, approveAndStake)
   }
   if(withdrawFee > 0){
-    _print_link(`Unstake ${userStaked.toFixed(fixedDecimals)} ${stakeTokenTicker} - Fee ${withdrawFee}%`, unstake)
+    _print_link(`Unstake ${formatMoney(userStaked, fixedDecimals)} ${stakeTokenTicker} - Fee ${withdrawFee}%`, unstake)
   }else{
-    _print_link(`Unstake ${userStaked.toFixed(fixedDecimals)} ${stakeTokenTicker}`, unstake)
+    _print_link(`Unstake ${formatMoney(userStaked, fixedDecimals)} ${stakeTokenTicker}`, unstake)
   }
-  _print_link(`Claim ${pendingRewardTokens.toFixed(fixedDecimals)} ${rewardTokenTicker} ($${formatMoney(pendingRewardTokens*rewardTokenPrice)})`, claim)
+  _print_link(`Claim ${formatMoney(pendingRewardTokens, fixedDecimals)} ${rewardTokenTicker} ($${formatMoney(pendingRewardTokens*rewardTokenPrice)})`, claim)
   _print(`Staking or unstaking also claims rewards.`)
   _print("");
 }
@@ -2163,7 +2177,7 @@ async function loadChefContract(App, chef, chefAddress, chefAbi, rewardTokenTick
   averageApr = averageApr / totalUserStaked;
   _print_bold(`Total Staked: $${formatMoney(totalStaked)}`);
   if (totalUserStaked > 0) {
-    _print_bold(`\nYou are staking a total of $${formatMoney(totalUserStaked)} at an average APR of ${(averageApr * 100).toFixed(2)}%`)
+    _print_bold(`\nYou are staking a total of $${formatMoney(totalUserStaked)} at an average APR of ${formatMoney((averageApr * 100), 2)}%`)
     _print(`Estimated earnings:`
         + ` Day $${formatMoney(totalUserStaked*averageApr/365)}`
         + ` Week $${formatMoney(totalUserStaked*averageApr/52)}`
@@ -2214,8 +2228,8 @@ async function loadBoardroom(App, prices, boardroomAddress, oracleAddress, lptAd
     const userPct = userStaked / totalStaked * 100;
     const earned = await BOARDROOM.earned(App.YOUR_ADDRESS) / 1e18;
     _print(`Boardroom`);
-    _print(`There is a total ${totalStaked.toFixed(2)} ${stakeTicker} ($${formatMoney(totalStakedUsd)}) staked in the Boardroom.`)
-    _print(`You are staking ${userStaked} ${stakeTicker} ($${formatMoney(userStakedUsd)}), ${userPct.toFixed(2)}% of the pool.`);
+    _print(`There is a total ${formatMoney(totalStaked, 2)} ${stakeTicker} ($${formatMoney(totalStakedUsd)}) staked in the Boardroom.`)
+    _print(`You are staking ${userStaked} ${stakeTicker} ($${formatMoney(userStakedUsd)}), ${formatMoney(userPct, 2)}% of the pool.`);
 
     const rewardPrice = getParameterCaseInsensitive(prices, rewardTokenAddress).usd;
     const oldTimestamp = await ORACLE.blockTimestampLast();
