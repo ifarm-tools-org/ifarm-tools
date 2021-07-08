@@ -351,7 +351,7 @@ async function loadMaticChefContract(App, tokens, prices, chef, chefAddress, che
   const rewardToken = await getMaticToken(App, rewardTokenAddress, chefAddress);
   const rewardsPerWeek = rewardsPerWeekFixed ?? 
     await chefContract.callStatic[rewardsPerBlockFunction]() 
-    / 10 ** rewardToken.decimals * 604800 / 3
+    / 10 ** rewardToken.decimals * 604800 / 2.2
 
   const poolInfos = await Promise.all([...Array(poolCount).keys()].map(async (x) =>
     await getMaticPoolInfo(App, chefContract, chefAddress, x, pendingRewardsFunction)));
