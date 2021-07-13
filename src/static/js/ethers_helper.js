@@ -1432,6 +1432,7 @@ function getUniPrices(tokens, prices, pool, chain="eth")
   else if (pool.symbol.includes("SPIRIT")) stakeTokenTicker += " SPIRIT LP";
   else if (pool.symbol.includes("spLP")) stakeTokenTicker += " SPOOKY LP";
   else if (pool.symbol.includes("BRUSH-LP")) stakeTokenTicker += " BRUSH LP";
+  else if (pool.symbol.includes("ZDEXLP")) stakeTokenTicker += " ZOODEX LP";
   else if (pool.symbol.includes("Beco-LP")) stakeTokenTicker += " Beco LP";
   else if (pool.symbol.includes("Lv1")) stakeTokenTicker += " STEAK LP";
   else if (pool.symbol.includes("PLP")) stakeTokenTicker += " Pure Swap LP";
@@ -1486,6 +1487,7 @@ function getUniPrices(tokens, prices, pool, chain="eth")
               pool.symbol.includes("SPIRIT") ?  `https://swap.spiritswap.finance/#/swap` :
               pool.symbol.includes("spLP") ?  `https://info.spookyswap.finance/pair/${pool.address}` :
               pool.symbol.includes("BRUSH-LP") ? `https://info.paintswap.finance/pair/${pool.address}`:
+              pool.symbol.includes("ZDEXLP") ? `https://dex.zoocoin.cash/orders/market?inputCurrency=${t0.address}&outputCurrency=${t1.address}` :
               pool.symbol.includes("Beco-LP") ?  `https://becoswap.info/pair/${pool.address}` :
               pool.symbol.includes("Lv1") ?  `https://info.steakhouse.finance/pair/${pool.address}` :
               pool.symbol.includes("ELP") ?  `https://app.elk.finance/#/swap` :
@@ -1556,7 +1558,12 @@ function getUniPrices(tokens, prices, pool, chain="eth")
             `https://exchange.paintswap.finance/#/remove/${t0address}/${t1address}`,
             `https://exchange.paintswap.finance/#/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
           ] :
-            pool.symbol.includes("Beco-LP") ? [
+          pool.symbol.includes("ZDEXLP") ? [
+            `https://https://dex.zoocoin.cash/pool/add?inputCurrency=${t0address}&outputCurrency=${t1address}`,
+            `https://https://dex.zoocoin.cash/pool`,
+            `https://https://dex.zoocoin.cash/orders/market?inputCurrency=${t0address}&outputCurrency=${t1address}`
+          ]
+          pool.symbol.includes("Beco-LP") ? [
             `https://exchange.becoswap.com/#/add/${t0address}/${t1address}`,
             `https://exchange.becoswap.com/#/remove/${t0address}/${t1address}`,
             `https://exchange.becoswap.com/#/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
