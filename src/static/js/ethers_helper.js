@@ -1559,10 +1559,10 @@ function getUniPrices(tokens, prices, pool, chain="eth")
             `https://exchange.paintswap.finance/#/swap?inputCurrency=${t0address}&outputCurrency=${t1address}`
           ] :
           pool.symbol.includes("ZDEXLP") ? [
-            `https://https://dex.zoocoin.cash/pool/add?inputCurrency=${t0address}&outputCurrency=${t1address}`,
-            `https://https://dex.zoocoin.cash/pool`,
-            `https://https://dex.zoocoin.cash/orders/market?inputCurrency=${t0address}&outputCurrency=${t1address}`
-          ]
+            `https://dex.zoocoin.cash/pool/add?inputCurrency=${t0address}&outputCurrency=${t1address}`,
+            `https://dex.zoocoin.cash/pool`,
+            `https://dex.zoocoin.cash/orders/market?inputCurrency=${t0address}&outputCurrency=${t1address}`
+          ] :
           pool.symbol.includes("Beco-LP") ? [
             `https://exchange.becoswap.com/#/add/${t0address}/${t1address}`,
             `https://exchange.becoswap.com/#/remove/${t0address}/${t1address}`,
