@@ -21,6 +21,12 @@ const main = async() => {
         "https://viper.exchange"
       ],
       [
+        "Viper (smartchef)",
+        `<a href='viper/smartchef'>Various</a>`,
+        "Various",
+        "https://viper.exchange"
+      ],
+      [
         "Open Swap",
         `<a href='oswap'>Various</a>`,
         "oSWAP",
@@ -31,6 +37,36 @@ const main = async() => {
         `<a href='loot'>Various</a>`,
         "LOOT",
         "https://lootswap.finance"
+      ],
+      [
+        "Daikiri",
+        `<a href='daikiri'>Various</a>`,
+        "DAIKI",
+        "https://daikiri.finance/#"
+      ],
+      [
+        "Sushi",
+        `<a href='sushi'>Various</a>`,
+        "SUSHI",
+        "https://app.sushi.com"
+      ],
+      [
+        "Piggybank",
+        `<a href='piggybank'>Various</a>`,
+        "COINK",
+        "https://piggybank.farm/#/"
+      ],
+      [
+        "Troll",
+         `<a href='troll'>Various</a>`,
+          "TROLL",
+          "https://lootswap.finance/guilds/troll"
+      ],
+      [
+          "Arbiter",
+           `<a href='arbiter'>Various</a>`,
+            "ARB",
+            "https://lootswap.finance/guilds/arb"
       ]
     ]
   }

@@ -611,8 +611,8 @@ async function main() {
     if (currentBlock < startBlock) {
         _print(`Rewards start at block ${startBlock}\n`);
     } else {
-        rewardsPerWeek = await FIRE_CHEF.fishPerBlock() / 1e9 *
-            604800 / 2.0;
+        rewardsPerWeek = await FIRE_CHEF.firePerBlock() / 1e9 *
+            604800 / 2.1;
     }
 
     const tokens = {};
