@@ -165,7 +165,10 @@ async function printMcnSynthetixPool(App, tokens, prices, info, chain="eth") {
     _print(`<a target="_blank" href="https://etherscan.io/address/${info.stakingAddress}#code">Etherscan</a>`);
     _print_link(`Stake ${info.userUnstaked.toFixed(6)} ${info.stakeTokenTicker}`, approveTENDAndStake)
     _print_link(`Unstake ${info.userStaked.toFixed(6)} ${info.stakeTokenTicker}`, unstake)
-    _print_link(`Claims ${info.rewardTokens[0].earned.toFixed(6)} ${info.rewardTokens[0].rewardTokenTicker} ($${formatMoney(info.rewardTokens[0].earned * rewardTokenPrices[0])}) + ${info.rewardTokens[1].earned.toFixed(6)} ${info.rewardTokens[1].rewardTokenTicker} ($${formatMoney(info.rewardTokens[1].earned * rewardTokenPrices[1])}) + ${info.rewardTokens[2].earned.toFixed(2)} ${info.rewardTokens[2].rewardTokenTicker} ($${formatMoney(info.rewardTokens[2].earned * rewardTokenPrices[2])})`, claim)
+    _print_link(`Claim ${info.rewardTokens[0].earned.toFixed(6)} ${info.rewardTokens[0].rewardTokenTicker} ($${formatMoney(info.rewardTokens[0].earned * rewardTokenPrices[0])})`, claim)
+  for (let i = 1; i < info.rewardTokens.length; i++) {
+    _print_link(`    + ${info.rewardTokens[i].earned.toFixed(6)} ${info.rewardTokens[i].rewardTokenTicker} ($${formatMoney(info.rewardTokens[0].earned * rewardTokenPrices[0])})`, claim)
+  }
     _print_link(`Revoke (set approval to 0)`, revoke)
     _print_link(`Exit`, exit)
     _print("");
